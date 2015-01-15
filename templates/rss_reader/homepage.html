@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Leitor de RSS</title>
+
+    <style type="text/css" rel="stylesheet">
+        .notice {
+            width: 960px;
+            margin: 100px auto 0 auto;
+            text-align: center;
+            font-family: sans-serif;
+        }
+        .date {
+            color: #3284D5;
+            font-size: 20px;
+            text-align: center;
+            width: 600px;
+            margin: 0 0 20px 0;
+        }
+        .title {
+            color: #000;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px 0 0 52px;
+            width:600px;
+            float:left
+        }
+        .arrow-left {
+            float: left;
+            width: 128px;
+            height: 128px;
+            -ms-transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+        .arrow-right {
+            margin: 0;
+            width: 128px;
+            height: 128px;
+            float: right;
+            -ms-transform: rotate(90deg);
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+    </style>
+
+</head>
+<body>
+{% with page.object_list.0 as item %}
+    <div class="notice">
+        {% if page.has_previous %}
+            <a href="{% url 'home-page' page.previous_page_number %}"><img src="/static/img/seta.jpg" width="128" height="128" class="arrow-left"></a>
+        {% else %}
+            <div class="arrow-left"></div>
+        {% endif %}
+        <div class="title">
+            <div class="date">{{ item.pub_date|date:"d \d\e F \d\e Y"  }}</div>
+            {{ item.title }}
+        </div>
+        {% if page.has_next %}
+            <a href="{% url 'home-page' page.next_page_number %}"><img src="/static/img/seta.jpg" width="128" height="128" class="arrow-right"></a>
+        {% else %}
+            <div class="arrow-right"></div>
+        {% endif %}
+    </div>
+{% endwith %}
+</body>
+</html>
