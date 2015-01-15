@@ -1,0 +1,12 @@
+# Compiled files
+*.pyc
+*.pyo
+
+# Directories
+.idea/
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
